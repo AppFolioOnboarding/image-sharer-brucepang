@@ -1,6 +1,27 @@
 require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
+  def test_index
+    images = [
+      Image.create(url: 'https://google.com', created_at: 3.minutes.ago),
+      Image.create(url: 'https://facebook.com', created_at: 2.minutes.ago)
+    ]
+
+    get root_path
+    assert_response :ok
+
+    assert_select '.image' do |elements|
+      displayed_image_urls = elements.map { |element| element.attr('src') }
+      assert_equal displayed_image_urls, images.reverse.map(&:url)
+    end
+  end
+
+  def test_index__wo_image
+    get root_path
+    assert_response :ok
+    assert_select '.image', 0
+  end
+
   def test_new
     get new_image_path
     assert_response :ok
