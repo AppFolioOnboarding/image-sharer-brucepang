@@ -56,4 +56,16 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select '.error', 'is invalid url'
   end
+
+  def test_show
+    image = Image.create(url: 'https://google.com', tag_list: 'google, search')
+    get image_path(image.id)
+
+    assert_response :ok
+    assert_select '.image' do |element|
+      displayed_image_url = element.attr('src').value
+      assert_equal displayed_image_url, image.url
+    end
+    assert_select '.image_tag', 'google, search'
+  end
 end
