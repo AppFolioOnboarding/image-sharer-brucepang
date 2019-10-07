@@ -5,3 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Image.create([{ url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' },
+              { url: 'https://learn.appfolio.com/apm/www/images/apm-mobile-nav2-logo.png' },
+              { url: 'https://pbs.twimg.com/profile_images/999418366858149888/zKQCw1Ok_400x400.jpg' }])
