@@ -27,14 +27,25 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select '.image_url'
+    assert_select '#image_tag_list'
   end
 
   def test_create
-    post images_path, params: { image: { url: 'https://www.google.com' } }
+    post images_path, params: { image: { url: 'https://www.google.com', tag_list: 'google, search' } }
     assert_redirected_to image_path(Image.last)
 
     assert_equal 'Image successfully created', flash[:notice]
     assert_equal 'https://www.google.com', Image.last.url
+    assert_equal %w[google search], Image.last.tag_list
+  end
+
+  def test_create__no_tag
+    post images_path, params: { image: { url: 'https://www.google.com', tag_list: '' } }
+    assert_redirected_to image_path(Image.last)
+
+    assert_equal 'Image successfully created', flash[:notice]
+    assert_equal 'https://www.google.com', Image.last.url
+    assert_equal [], Image.last.tag_list
   end
 
   def test_create__invalid
