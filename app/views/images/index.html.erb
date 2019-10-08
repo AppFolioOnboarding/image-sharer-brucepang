@@ -1,7 +1,10 @@
 <h1>Welcome to Bo's first project</h1>
 <% @images.each do |image| %>
-  <div>
-    <%= image_tag(image.url, class: 'image')  %>
+  <div class="js-image-bundle">
+    <%= image_tag(image.url, class: 'js-image image')  %>
+    <div class="js-tag-list">
+      <%= image.tag_list %>
+    </div>
   </div>
 <% end %>
 
