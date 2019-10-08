@@ -76,7 +76,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     post images_path, params: { image: { url: 'https://www.google.com', tag_list: 'google, search' } }
     assert_redirected_to image_path(Image.last)
 
-    assert_equal 'Image successfully created', flash[:notice]
+    assert_equal 'Image successfully created', flash[:success]
     assert_equal 'https://www.google.com', Image.last.url
     assert_equal %w[google search], Image.last.tag_list
   end
@@ -85,7 +85,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     post images_path, params: { image: { url: 'https://www.google.com', tag_list: '' } }
     assert_redirected_to image_path(Image.last)
 
-    assert_equal 'Image successfully created', flash[:notice]
+    assert_equal 'Image successfully created', flash[:success]
     assert_equal 'https://www.google.com', Image.last.url
     assert_equal [], Image.last.tag_list
   end
