@@ -3,9 +3,15 @@
   <div class="js-image-bundle">
     <%= image_tag(image.url, class: 'js-image image')  %>
     <div class="js-tag-list">
-      <%= image.tag_list %>
+      <% image.tag_list.each do |tag| %>
+        <%= link_to tag, images_path(tag: tag) %>
+      <% end %>
     </div>
   </div>
+<% end %>
+
+<% if @images.blank? %>
+  <h5 class="js-tag-not-exist"> There is no image under this tag. </h5>
 <% end %>
 
 <%= link_to 'Add Image', new_image_path %>
