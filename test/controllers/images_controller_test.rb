@@ -102,12 +102,18 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   def test_show
     image = Image.create(url: 'https://google.com', tag_list: 'google, search')
     get image_path(image.id)
-
     assert_response :ok
+
     assert_select '.js-image' do |element|
       displayed_image_url = element.attr('src').value
       assert_equal displayed_image_url, image.url
     end
-    assert_select '.js-tag-list', 'google, search'
+
+    assert_select '.js-tag-list a' do |elements|
+      displayed_image_tag_list = elements.map { |element| element.inner_text.strip }
+      assert_equal %w[google search], displayed_image_tag_list
+      displayed_image_tag_list_hrefs = elements.map { |element| element.attr('href').split('=')[1] }
+      assert_equal %w[google search], displayed_image_tag_list_hrefs
+    end
   end
 end
