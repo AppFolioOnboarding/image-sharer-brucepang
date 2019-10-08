@@ -5,6 +5,8 @@ class ImagesController < ApplicationController
               else
                 Image.order(created_at: :desc)
               end
+
+    flash.now[:warning] = 'There is no image under this tag' if @images.blank?
   end
 
   def new

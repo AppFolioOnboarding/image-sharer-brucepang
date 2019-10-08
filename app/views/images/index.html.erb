@@ -10,8 +10,4 @@
   </div>
 <% end %>
 
-<% if @images.blank? %>
-  <h5 class="js-tag-not-exist"> There is no image under this tag. </h5>
-<% end %>
-
 <%= link_to 'Add Image', new_image_path %>

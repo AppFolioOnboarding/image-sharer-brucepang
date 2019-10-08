@@ -55,7 +55,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select '.js-image', 0
-    assert_select '.js-tag-not-exist', 1
+    assert_includes response.body, 'There is no image under this tag'
   end
 
   def test_index__wo_image
