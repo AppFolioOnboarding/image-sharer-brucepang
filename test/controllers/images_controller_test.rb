@@ -18,6 +18,15 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.js-tag-not-exist', 0
   end
 
+  def test_index__image_should_link_to_show
+    image = Image.create(url: 'https://google.com')
+
+    get root_path
+    assert_response :ok
+
+    assert_select "a[href='/images/#{image.id}'] > img[src='https://google.com']"
+  end
+
   def test_index__tag_list
     images = [
       Image.create(url: 'https://google.com', created_at: 3.minutes.ago, tag_list: 'google'),
@@ -115,5 +124,35 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       displayed_image_tag_list_hrefs = elements.map { |element| element.attr('href').split('=')[1] }
       assert_equal %w[google search], displayed_image_tag_list_hrefs
     end
+  end
+
+  def test_show__delete_image
+    image = Image.create(url: 'https://google.com')
+    get image_path(image.id)
+    assert_response :ok
+
+    assert_select '.js-delete-image' do |element|
+      assert_equal 'Are you sure you want to delete the image?',
+                   element.attr('data-confirm').value
+    end
+  end
+
+  def test_destroy
+    image = Image.create(url: 'https://google.com')
+    assert_difference('Image.count', -1) do
+      delete image_path(image)
+    end
+
+    assert_redirected_to images_path
+    assert_equal 'Image successfully deleted', flash[:success]
+  end
+
+  def test_destroy__already_deleted_image
+    assert_difference('Image.count', 0) do
+      delete image_path(99)
+    end
+
+    assert_redirected_to images_path
+    assert_equal 'Image successfully deleted', flash[:success]
   end
 end
