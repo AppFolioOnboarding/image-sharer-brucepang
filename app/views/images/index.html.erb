@@ -1,7 +1,9 @@
 <h1>Welcome to Bo's first project</h1>
 <% @images.each do |image| %>
   <div class="js-image-bundle">
-    <%= image_tag(image.url, class: 'js-image image')  %>
+    <%= link_to image do %>
+      <%= image_tag(image.url, class: 'js-image image')  %>
+    <% end %>
     <div class="js-tag-list">
       <% image.tag_list.each do |tag| %>
         <%= link_to tag, images_path(tag: tag) %>

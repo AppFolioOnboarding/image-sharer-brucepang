@@ -18,6 +18,15 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.js-tag-not-exist', 0
   end
 
+  def test_index__image_should_link_to_show
+    image = Image.create(url: 'https://google.com')
+
+    get root_path
+    assert_response :ok
+
+    assert_select "a[href='/images/#{image.id}'] > img[src='https://google.com']"
+  end
+
   def test_index__tag_list
     images = [
       Image.create(url: 'https://google.com', created_at: 3.minutes.ago, tag_list: 'google'),
