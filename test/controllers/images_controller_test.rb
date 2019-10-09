@@ -125,4 +125,34 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       assert_equal %w[google search], displayed_image_tag_list_hrefs
     end
   end
+
+  def test_show__delete_image
+    image = Image.create(url: 'https://google.com')
+    get image_path(image.id)
+    assert_response :ok
+
+    assert_select '.js-delete-image' do |element|
+      assert_equal 'Are you sure you want to delete the image?',
+                   element.attr('data-confirm').value
+    end
+  end
+
+  def test_destroy
+    image = Image.create(url: 'https://google.com')
+    assert_difference('Image.count', -1) do
+      delete image_path(image)
+    end
+
+    assert_redirected_to images_path
+    assert_equal 'Image successfully deleted', flash[:success]
+  end
+
+  def test_destroy__already_deleted_image
+    assert_difference('Image.count', 0) do
+      delete image_path(99)
+    end
+
+    assert_redirected_to images_path
+    assert_equal 'Image successfully deleted', flash[:success]
+  end
 end
