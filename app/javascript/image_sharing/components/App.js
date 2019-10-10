@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import Footer from './Footer';
 import Header from './Header';
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
         </FormGroup>
         <Button>Submit</Button>
       </Form>
-      <footer> Copyright: Appfolio Inc. Onboarding </footer>
+      <Footer>Copyright: Appfolio Inc. Onboarding</Footer>
     </div>
   );
 }
