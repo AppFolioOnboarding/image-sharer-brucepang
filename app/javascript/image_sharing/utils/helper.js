@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import 'whatwg-fetch';
+// import 'whatwg-fetch';
 
 const HEADERS = {
   Accept: 'application/json',
